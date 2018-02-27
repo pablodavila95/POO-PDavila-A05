@@ -41,7 +41,7 @@ std::string FormatoHora::to_String() {
     muestraHora= (std::to_string(getHoras()));
     muestraMinutos= (std::to_string(getMinutos()));
     muestraSegundos= (std::to_string(getSegundos()));
-    return muestraHora+ "/"+muestraMinutos+"/"+muestraSegundos;
+    return muestraHora+ ":"+muestraMinutos+":"+muestraSegundos;
 }
 
 FormatoHora operator+(const FormatoHora &hi, const FormatoHora &hf) {
@@ -65,13 +65,29 @@ FormatoHora FormatoHora::corregirHora() {
     v2 = getMinutos();
     v3 = getSegundos();
 
+    int tempvar1, tempvar2;
     if (v3>60) {
         v2 = v2+1;
         setMinutos(v2);
     }
+    else if (v3<0) {
+        tempvar1 = abs(v3);
+        v3 = 60 - tempvar1;
+        v2 = v2-1;
+        setMinutos(v2);
+        setSegundos(v3);
+    }
+
     if (v2>60) {
         v1 = v1+1;
         setHoras(v1);
+    }
+    else if (v2<0) {
+        tempvar2 = abs(v2);
+        v2 = 60 - tempvar2;
+        v1 = v1-1;
+        setHoras(v1);
+        setMinutos(v2);
     }
 
 }
