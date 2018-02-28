@@ -75,6 +75,8 @@ int main(){
     FormatoHora hora2 = *new FormatoHora(h2,m2,s2);
 
     std::cout<<"La clase dura: \n";
+    
+    //operadores sobrecargados
     FormatoHora horaFinal = hora2 - hora1;
     horaFinal.corregirHora();
 
