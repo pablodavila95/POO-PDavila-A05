@@ -45,7 +45,13 @@ std::string FormatoHora::to_String() {
 }
 
 FormatoHora operator+(const FormatoHora &hi, const FormatoHora &hf) {
-    FormatoHora resultado (hi.horas+hf.horas, hi.minutos+hf.minutos, hi.segundos+hf.segundos);
+    int ht, mt, st;
+    ht = hi.horas+hf.horas;
+    mt = hi.minutos+hf.minutos;
+    st = hi.segundos+hf.segundos;
+
+    FormatoHora resultado = *new FormatoHora(ht,mt,st);
+    resultado.corregirHora();
     return resultado;
 }
 
@@ -56,52 +62,58 @@ FormatoHora operator-(const FormatoHora &hi, const FormatoHora &hf) {
     st = hi.segundos-hf.segundos;
 
     FormatoHora resultado = *new FormatoHora(ht,mt,st);
+    resultado.corregirHora(resultado);
     return resultado;
 }
 
-FormatoHora FormatoHora::corregirHora() {
-    int v1, v2, v3;
+
+// dentro del operator+- retornar el metodo con el resultado como parametro y directamente valida la hora
+
+//corregirHora seria funcion miembro, si retornara un booleano y se agrega resultado.corregirHora(); (se valida a si mismo) y retorna HR o true
+
+bool FormatoHora::corregirHora(FormatoHora &i) {
+    int v1,v2,v3;
     v1 = getHoras();
     v2 = getMinutos();
     v3 = getSegundos();
 
-    int tempvar1, tempvar2;
-    if (v3>60) {
-        v2 = v2+1;
-        setMinutos(v2);
-    }
-    else if (v3<0) {
-        tempvar1 = abs(v3);
-        v3 = 60 - tempvar1;
-        v2 = v2-1;
-        setMinutos(v2);
-        setSegundos(v3);
+        if (v3>60) {
+            v3 = v3 - 60;
+            v2++;
+            //setMinutos(v2);
+            //setSegundos(v3);
+        }
+
+        if (v2>60) {
+            v2 = v2 - 60;
+            v1++;
+            //setHoras(v1);
+            //setMinutos(v2);
+        }
+
+        if (v1>24) {
+            v1 = v1 - 24;
+            //setHoras(v1);
+        }
+    std::cout << v1;
+    std::cout << v2;
+    std::cout << v3;
+
+    setHoras(v1);
+    setMinutos(v2);
+    setSegundos(v3);
     }
 
-    if (v2>60) {
-        v1 = v1+1;
-        setHoras(v1);
-    }
-    else if (v2<0) {
-        tempvar2 = abs(v2);
-        v2 = 60 - tempvar2;
-        v1 = v1-1;
-        setHoras(v1);
-        setMinutos(v2);
-    }
-
+void FormatoHora::setHoras(int h) {
+    this->horas = h;
 }
 
-void FormatoHora::setHoras(int horas) {
-    FormatoHora::horas = horas;
+void FormatoHora::setMinutos(int m) {
+    this->minutos = m;
 }
 
-void FormatoHora::setMinutos(int minutos) {
-    FormatoHora::minutos = minutos;
-}
-
-void FormatoHora::setSegundos(int segundos) {
-    FormatoHora::segundos = segundos;
+void FormatoHora::setSegundos(int s) {
+    this->segundos = s;
 }
 
 

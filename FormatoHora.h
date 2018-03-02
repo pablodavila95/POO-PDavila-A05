@@ -21,7 +21,7 @@ private:
 //Metodos de la clase FormatoHora.
 public:
     FormatoHora(int h, int m, int s);
-    FormatoHora corregirHora();
+    bool corregirHora(FormatoHora &i);
     int getHoras();
     int getMinutos();
     int getSegundos();
