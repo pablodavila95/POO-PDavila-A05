@@ -78,8 +78,8 @@ int main(){
             std::cout << "Error en la entrada de segundos (Rango de 0 a 60) \n";
         }
 
-        FormatoHora hora1 = *new FormatoHora(h1,m1,s1);
-        FormatoHora hora2 = *new FormatoHora(h2,m2,s2);
+        FormatoHora hora1(h1,m1,s1);
+        FormatoHora hora2(h2,m2,s2);
 
         std::cout<<"La clase dura: \n";
 
@@ -100,14 +100,13 @@ int main(){
         std::cin >> m2;
         std::cin >> s2;
 
-        FormatoHora horaS1 = *new FormatoHora(h1,m1,s1);
-        FormatoHora horaS2 = *new FormatoHora(h2,m2,s2);
+        FormatoHora horaS1(h1,m1,s1);
+        FormatoHora horaS2(h2,m2,s2);
 
         std::cout<<"La clase dura: \n";
         FormatoHora horaFinalSuma = horaS1 + horaS2;
-
-        horaFinalSuma.to_String();
-
+        std::string nombre =horaFinalSuma.to_String();
+        std::cout << nombre;
 
     }
     return 0;

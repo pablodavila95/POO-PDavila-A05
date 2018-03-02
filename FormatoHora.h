@@ -31,11 +31,11 @@ public:
     bool validaHrs(int);
     bool validaMS(int);
 
-    void setHoras(int horas);
+    void setHoras(const int& h);
 
-    void setMinutos(int minutos);
+    void setMinutos(const int& m);
 
-    void setSegundos(int segundos);
+    void setSegundos(const int& s);
 };
 
 
